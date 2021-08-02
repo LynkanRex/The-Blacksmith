@@ -12,7 +12,6 @@ public class Bellows : MonoBehaviour
 
     public void HeatForge()
     {
-        Debug.Log("Bellows activated");
         MessageHandler.SendMessage(new BellowsEvent());   
     }
 }
