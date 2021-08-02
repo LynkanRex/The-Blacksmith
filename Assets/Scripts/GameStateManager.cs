@@ -45,10 +45,10 @@ public class GameStateManager : MonoBehaviour
         currentlySpawnedIronIngotObject.transform.position = ingotSpawnPoint.transform.position;
     }
 
-    public void SellDagger()
+    public void SellDagger(GameObject objectToSell)
     {
         UpdateMoneyAmountAndDisplay(daggerSellPrice);
-        Destroy(currentlySpawnedIronDaggerObject);
+        Destroy(objectToSell);
     }
 
     public void BuyIngot()
