@@ -1,5 +1,3 @@
-using System;
-using System.Timers;
 using UnityEngine;
 
 public class SellArea : MonoBehaviour
@@ -12,7 +10,11 @@ public class SellArea : MonoBehaviour
     private void Update()
     {
         if (soldRecently)
+        {
             remainingTimer -= Time.deltaTime;
+            if (remainingTimer <= 0.0f)
+                soldRecently = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

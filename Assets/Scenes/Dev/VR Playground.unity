@@ -764,7 +764,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 406044494999599331, guid: 2bc9eace42124694fa08ed07550041f0, type: 3}
       propertyPath: index
-      value: 90000000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8105401222828808089, guid: 2bc9eace42124694fa08ed07550041f0, type: 3}
       propertyPath: m_RootOrder
@@ -820,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 658622422}
     - target: {fileID: 8105401222828808095, guid: 2bc9eace42124694fa08ed07550041f0, type: 3}
       propertyPath: m_Name
-      value: Ingot Instance
+      value: Ingot Orig Instance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bc9eace42124694fa08ed07550041f0, type: 3}
@@ -1109,11 +1109,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4588674927532963774, guid: 95ddb4db8ce1d0a47b6573770e06bc7f, type: 3}
       propertyPath: index
-      value: 90000000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860745598099624731, guid: 95ddb4db8ce1d0a47b6573770e06bc7f, type: 3}
       propertyPath: m_Name
-      value: Dagger Instance
+      value: Dagger Orig Instance
       objectReference: {fileID: 0}
     - target: {fileID: 6002516409621220739, guid: 95ddb4db8ce1d0a47b6573770e06bc7f, type: 3}
       propertyPath: m_InteractionManager

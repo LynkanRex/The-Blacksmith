@@ -56,14 +56,14 @@ public class GameStateManager : MonoBehaviour
         currentlySpawnedIronIngotObject = Instantiate(ironIngotObject);
         currentlySpawnedIronDaggerObject = Instantiate(ironDaggerObject);
 
-        currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = spawnedIngots.Count;
-        currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = spawnedDaggers.Count;
+        currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = spawnedIngots.Count+1;
+        currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = spawnedDaggers.Count+1;
 
         currentlySpawnedIronDaggerObject.transform.position = poolSpawnPoint.transform.position;
         currentlySpawnedIronIngotObject.transform.position = poolSpawnPoint.transform.position;
 
-        spawnedIngots.Add(spawnedIngots.Count, currentlySpawnedIronIngotObject);
-        spawnedDaggers.Add(spawnedDaggers.Count, currentlySpawnedIronDaggerObject);
+        spawnedIngots.Add(spawnedIngots.Count+1, currentlySpawnedIronIngotObject);
+        spawnedDaggers.Add(spawnedDaggers.Count+1, currentlySpawnedIronDaggerObject);
         
         TranslateIngot();
         ClearInstanceCache();
@@ -84,10 +84,13 @@ public class GameStateManager : MonoBehaviour
     {
         foreach (var entry in spawnedIngots)
         {
-            var ingotObject = entry.Value;
-            spawnedIngots.Remove(entry.Key);
-            Destroy(ingotObject);
-            break;
+            if (entry.Key == index)
+            {
+                var ingotObject = entry.Value;
+                spawnedIngots.Remove(entry.Key);
+                Destroy(ingotObject);
+                break;    
+            }
         }
         
         foreach (var entry in spawnedDaggers)
