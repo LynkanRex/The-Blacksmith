@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8105401222828808095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.545, y: 1.794, z: 0.005}
-  m_LocalScale: {x: 0.1, y: 0.04, z: 0.25}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8105401222828808095}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 67162b9b39840764ea83fa2ee676e739, type: 3}
 --- !u!23 &8105401222828808091
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.322612, y: 0.1527386, z: 0.6440336}
+  m_Center: {x: 0.0009897053, y: 0.07310343, z: 0.000654757}
 --- !u!65 &6162212597599364059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.322612, y: 0.15273857, z: 0.64403355}
+  m_Center: {x: 0.0009897053, y: 0.07310343, z: 0.000654757}
 --- !u!54 &8105401222828808093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7297ff946b5094186445625d0d1572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heat: 0
   heatingSpeed: 3
+  heatingThreshold: 10
   progressStages:
-  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 4300000, guid: 67162b9b39840764ea83fa2ee676e739, type: 3}
   - {fileID: 978489529391142597, guid: 2a3d252efd2318a4ba2780165222e0a9, type: 3}
   strikesPerProgressStage: 5
   heatedMaterial: {fileID: 2100000, guid: 8531d1516f3c42944ad4b055598c0589, type: 2}
