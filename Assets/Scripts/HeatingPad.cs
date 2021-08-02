@@ -21,7 +21,7 @@ public class HeatingPad : MonoBehaviour
 
     private void Update()
     {
-        if (currentTimer > 0.00f)
+        if (currentTimer > 0.0f)
             currentTimer -= Time.deltaTime * timerSpeed;
         else if(isOn)
             isOn = false;
