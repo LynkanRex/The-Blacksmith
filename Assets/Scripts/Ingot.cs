@@ -22,6 +22,8 @@ public class Ingot : MonoBehaviour
     private int currentProgressStage;
     private Material startMat;
 
+    public int index;
+    
     private void Awake()
     {
         startMat = GetComponent<MeshRenderer>().material;
@@ -85,17 +87,20 @@ public class Ingot : MonoBehaviour
     {
         if (!malleable)
             return;
+        if (!isOnAnvil)
+            return;
         if (currentProgressStage == progressStages.Length && currentStrikes >= strikesPerProgressStage)
             return;
         
         currentStrikes++;
-        
         if (currentStrikes >= strikesPerProgressStage)
         {
             currentProgressStage++;
+            
             if (currentProgressStage == progressStages.Length)
             {
-                FindObjectOfType<GameStateManager>().SwapIngotForDagger();
+                Debug.Log("Swapping");
+                FindObjectOfType<GameStateManager>().SwapIngotForDagger(this.index);
                 return;
             }
             

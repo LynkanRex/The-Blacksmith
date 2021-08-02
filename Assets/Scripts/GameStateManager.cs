@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -18,37 +19,89 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private Transform poolSpawnPoint;
     [SerializeField] private Transform ingotSpawnPoint;
     
+    private Dictionary<int, GameObject> spawnedDaggers;
+    private Dictionary<int, GameObject> spawnedIngots;
+
     void Start()
     {
+        spawnedDaggers = new Dictionary<int, GameObject>();
+        spawnedIngots = new Dictionary<int, GameObject>();
         UpdateUI();
+    }
+
+    public void SwapIngotForDagger(int index)
+    {
+        var desiredTransform = Vector3.zero;
         
-        SpawnIngotAndTranslate();
-        SpawnDagger();
+        foreach (var entry in spawnedIngots)
+        {
+            if (entry.Key == index)
+            {
+                desiredTransform = entry.Value.transform.position;
+                entry.Value.transform.position = poolSpawnPoint.transform.position;
+            }
+        }
+
+        foreach (var entry in spawnedDaggers)
+        {
+            if (entry.Key == index)
+            {
+                entry.Value.transform.position = desiredTransform;
+            }   
+        }
     }
 
-    public void SwapIngotForDagger()
-    {
-        var desiredTransform = currentlySpawnedIronIngotObject.transform.position;
-        currentlySpawnedIronIngotObject.transform.position = currentlySpawnedIronDaggerObject.transform.position;
-        currentlySpawnedIronDaggerObject.transform.position = desiredTransform;
-        Destroy(currentlySpawnedIronIngotObject);
-    }
-
-    public void SpawnDagger()
-    {
-        currentlySpawnedIronDaggerObject = Instantiate(ironDaggerObject, poolSpawnPoint.transform);
-    }
-
-    public void SpawnIngotAndTranslate()
+    public void SpawnIngotAndDagger()
     {
         currentlySpawnedIronIngotObject = Instantiate(ironIngotObject);
+        currentlySpawnedIronDaggerObject = Instantiate(ironDaggerObject);
+
+        currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = spawnedIngots.Count;
+        currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = spawnedDaggers.Count;
+
+        currentlySpawnedIronDaggerObject.transform.position = poolSpawnPoint.transform.position;
+        currentlySpawnedIronIngotObject.transform.position = poolSpawnPoint.transform.position;
+
+        spawnedIngots.Add(spawnedIngots.Count, currentlySpawnedIronIngotObject);
+        spawnedDaggers.Add(spawnedDaggers.Count, currentlySpawnedIronDaggerObject);
+        
+        TranslateIngot();
+        ClearInstanceCache();
+    }
+
+    public void TranslateIngot()
+    {
         currentlySpawnedIronIngotObject.transform.position = ingotSpawnPoint.transform.position;
     }
 
-    public void SellDagger(GameObject objectToSell)
+    public void ClearInstanceCache()
     {
+        currentlySpawnedIronDaggerObject = null;
+        currentlySpawnedIronIngotObject = null;
+    }
+
+    public void SellDagger(int index)
+    {
+        foreach (var entry in spawnedIngots)
+        {
+            var ingotObject = entry.Value;
+            spawnedIngots.Remove(entry.Key);
+            Destroy(ingotObject);
+            break;
+        }
+        
+        foreach (var entry in spawnedDaggers)
+        {
+            if (entry.Key == index)
+            {
+                var daggerObject = entry.Value;
+                spawnedDaggers.Remove(entry.Key);
+                Destroy(daggerObject);
+                break;
+            }
+        }
+        
         UpdateMoneyAmountAndDisplay(daggerSellPrice);
-        Destroy(objectToSell);
     }
 
     public void BuyIngot()
@@ -57,8 +110,7 @@ public class GameStateManager : MonoBehaviour
             return;
         
         UpdateMoneyAmountAndDisplay(-ingotBuyPrice);
-        SpawnIngotAndTranslate();
-        SpawnDagger();
+        SpawnIngotAndDagger();
     }
 
     private bool CheckAffordability(int value)

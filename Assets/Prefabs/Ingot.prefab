@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8105401222828808095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.545, y: 1.794, z: 0.005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -144,12 +144,14 @@ MonoBehaviour:
   heatingThreshold: 10
   progressStages:
   - {fileID: 4300000, guid: 67162b9b39840764ea83fa2ee676e739, type: 3}
+  - {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 978489529391142597, guid: 2a3d252efd2318a4ba2780165222e0a9, type: 3}
-  strikesPerProgressStage: 5
+  strikesPerProgressStage: 1
   heatedMaterial: {fileID: 2100000, guid: 8531d1516f3c42944ad4b055598c0589, type: 2}
   isBeingHeated: 0
   malleable: 0
   isOnAnvil: 0
+  index: 0
 --- !u!114 &8105401222828808094
 MonoBehaviour:
   m_ObjectHideFlags: 0
