@@ -6,7 +6,7 @@ public class SellArea : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Dagger>() != null)
         {
-            FindObjectOfType<GameStateManager>().SellDagger();
+            FindObjectOfType<GameStateManager>().SellDagger(other.gameObject);
         }
     }
 }
