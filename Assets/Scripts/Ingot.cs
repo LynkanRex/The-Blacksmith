@@ -11,7 +11,6 @@ public class Ingot : MonoBehaviour
     private float heat;
     [SerializeField] private float heatingSpeed;
     [SerializeField] private float heatingThreshold;
-    
     [SerializeField] private Mesh[] progressStages;
     [SerializeField] private int strikesPerProgressStage;
     [SerializeField] private Material heatedMaterial;
@@ -19,12 +18,9 @@ public class Ingot : MonoBehaviour
     public bool isBeingHeated;
     public bool malleable;
     public bool isOnAnvil;
-
     private int currentStrikes;
     private int currentProgressStage;
     private Material startMat;
-    
-
 
     private void Awake()
     {
@@ -60,9 +56,23 @@ public class Ingot : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Anvil>() != null)
             isOnAnvil = true;
-        
-        if (other.gameObject.GetComponent<Mallet>() != null)
-            ImpartStrike();
+
+        if (other.gameObject.GetComponent<HammerHead>() != null)
+        {
+            var hammer = other.gameObject;
+            
+            var timeLeft = hammer.GetComponentInParent<Mallet>().RequestCoolDownData();
+            if (timeLeft <= 0.01f)
+            {
+                //TODO: Play particle effect and sound of dinging metal + sparks
+                ImpartStrike(); 
+                hammer.GetComponentInParent<Mallet>().TriggerCoolDown();
+            }
+            else
+            {
+                //TODO: play a weak "tink" sound in stead
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -82,8 +92,15 @@ public class Ingot : MonoBehaviour
         
         if (currentStrikes >= strikesPerProgressStage)
         {
-            currentStrikes -= strikesPerProgressStage;
+            currentProgressStage++;
+            if (currentProgressStage == progressStages.Length)
+            {
+                FindObjectOfType<GameStateManager>().SwapIngotForDagger();
+                return;
+            }
+            
             GetComponent<MeshFilter>().mesh = progressStages[currentProgressStage];
+            currentStrikes -= strikesPerProgressStage;
         }
     }
 }
