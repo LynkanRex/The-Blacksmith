@@ -42,6 +42,15 @@ public class Mallet : MonoBehaviour
     public void TriggerIsHeld()
     {
         isHeld = !isHeld;
-        Debug.Log("Held is now" + isHeld);
+    }
+
+    public float RequestCoolDownData()
+    {
+        return cooldownTimer;
+    }
+
+    public void TriggerCoolDown()
+    {
+        cooldownTimer = strikeCoolDown;
     }
 }
