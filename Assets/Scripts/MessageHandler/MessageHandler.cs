@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class MessageHandler : IMessageHandler{
-    private static MessageHandler _thisInstance;
-    public static MessageHandler Instance(){
-        return _thisInstance ?? (_thisInstance = new MessageHandler());
-    }
-  
+public class MessageHandler : MonoBehaviour, IMessageHandler{
+
     readonly Dictionary<Type, object> subscribers = new Dictionary<Type, object>();
     
     public void SubscribeMessage<TMessage>(Action<TMessage> callback){

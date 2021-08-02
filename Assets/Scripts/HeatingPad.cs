@@ -10,13 +10,17 @@ public class HeatingPad : MonoBehaviour
 
     [SerializeField] private float timer = 5.0f;
     [SerializeField] private float timerSpeed = 1.0f;
-
+    
     private float currentTimer = 0.0f;
+    
+    private IMessageHandler MessageHandler;
     
     private void Awake()
     {
         isOn = false;
-        MessageHandler.Instance().SubscribeMessage<BellowsEvent>(TurnOn);
+        
+        MessageHandler = FindObjectOfType<MessageHandler>();
+        MessageHandler.SubscribeMessage<BellowsEvent>(TurnOn);
     }
 
     private void Update()
@@ -70,6 +74,6 @@ public class HeatingPad : MonoBehaviour
 
     private void OnDestroy()
     {
-        MessageHandler.Instance().UnsubscribeMessage<BellowsEvent>(TurnOn);
+        MessageHandler.UnsubscribeMessage<BellowsEvent>(TurnOn);
     }
 }

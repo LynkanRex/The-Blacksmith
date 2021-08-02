@@ -3,23 +3,28 @@ using UnityEngine;
 public class Mallet : MonoBehaviour
 {
     public bool isHeld;
-    private BoxCollider collider;
+    [SerializeField] private BoxCollider[] colliders;
 
     [SerializeField] private float strikeCoolDown = 1.0f;
     
     private float cooldownTimer;
 
-    private void Awake()
-    {
-        this.collider = GetComponent<BoxCollider>();
-    }
     
     void Update()
     {
         if (isHeld)
-            this.collider.isTrigger = true;
+        {
+            foreach (var collider in colliders)
+            {
+                collider.isTrigger = true;    
+            }
+        }
+            
         else
-            this.collider.isTrigger = false;
+            foreach (var collider in colliders)
+            {
+                collider.isTrigger = false;    
+            }
 
         if (cooldownTimer >= 0.0f)
             cooldownTimer -= Time.deltaTime;
@@ -32,5 +37,11 @@ public class Mallet : MonoBehaviour
         
         if (other.gameObject.GetComponent<Ingot>() != null)
             cooldownTimer = strikeCoolDown;
+    }
+
+    public void TriggerIsHeld()
+    {
+        isHeld = !isHeld;
+        Debug.Log("Held is now" + isHeld);
     }
 }

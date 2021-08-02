@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class Ingot : MonoBehaviour
 {
+    public float Heat
+    {
+        get => heat;
+        set => heat = Mathf.Clamp(value, 0.0f, 100.0f);
+    }
 
-    [SerializeField] private float heat;
+    private float heat;
     [SerializeField] private float heatingSpeed;
+    [SerializeField] private float heatingThreshold;
     
     [SerializeField] private Mesh[] progressStages;
     [SerializeField] private int strikesPerProgressStage;
@@ -28,11 +34,11 @@ public class Ingot : MonoBehaviour
     void Update()
     {
         if (isBeingHeated)
-            heat += Time.deltaTime * heatingSpeed;
+            Heat += Time.deltaTime * heatingSpeed;
         else
-            heat -= Time.deltaTime * heatingSpeed;
-
-        if (heat >= 50.0f)
+            Heat -= Time.deltaTime * heatingSpeed;
+        
+        if (Heat >= heatingThreshold)
             StartIsMalleable();
         else
             EndIsMalleable();
