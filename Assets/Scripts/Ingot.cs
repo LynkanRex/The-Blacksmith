@@ -14,7 +14,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private Mesh[] progressStages;
     [SerializeField] private int strikesPerProgressStage;
     [SerializeField] private Material heatedMaterial;
-    
+
+    private ParticleSystem particleSystem;
     public bool isBeingHeated;
     public bool malleable;
     public bool isOnAnvil;
@@ -27,6 +28,7 @@ public class Ingot : MonoBehaviour
     private void Awake()
     {
         startMat = GetComponent<MeshRenderer>().material;
+        particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
@@ -93,6 +95,9 @@ public class Ingot : MonoBehaviour
             return;
         
         currentStrikes++;
+        particleSystem.Play();
+        //TODO: also play audio
+        
         if (currentStrikes >= strikesPerProgressStage)
         {
             currentProgressStage++;
