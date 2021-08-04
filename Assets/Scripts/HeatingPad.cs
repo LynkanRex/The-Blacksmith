@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class HeatingPad : MonoBehaviour
 {
@@ -68,6 +69,16 @@ public class HeatingPad : MonoBehaviour
             if (isOn)
                 other.gameObject.GetComponent<Ingot>().isBeingHeated = false;
             objects.Remove(other.gameObject);
+
+            if (objects.Count == 0)
+            {
+                var ingotsInPlay= FindObjectsOfType<Ingot>();
+                foreach (var ingot in ingotsInPlay)
+                {
+                    if (ingot.isBeingHeated)
+                        ingot.isBeingHeated = false;
+                }
+            }
         }
     }
 
