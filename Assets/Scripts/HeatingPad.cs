@@ -6,15 +6,15 @@ public class HeatingPad : MonoBehaviour
 {
     [SerializeField] private bool isOn;
     [SerializeField] private List<GameObject> objects;
-
-
     [SerializeField] private float timer = 5.0f;
     [SerializeField] private float timerSpeed = 1.0f;
+    
+    [SerializeField] private ParticleSystem forgeParticleSystem;
     
     private float currentTimer = 0.0f;
     
     private IMessageHandler MessageHandler;
-    
+
     private void Awake()
     {
         isOn = false;
@@ -27,8 +27,13 @@ public class HeatingPad : MonoBehaviour
     {
         if (currentTimer > 0.0f)
             currentTimer -= Time.deltaTime * timerSpeed;
-        else if(isOn)
+        else if (isOn)
+        {
             isOn = false;
+            //forgeParticleSystem.Stop();
+            //TODO: also stop playing forgesound
+        }
+            
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +54,7 @@ public class HeatingPad : MonoBehaviour
     {
         if (!isOn)
             return;
-
+        
         foreach (var ingot in objects)
         {
             ingot.GetComponent<Ingot>().isBeingHeated = true;
@@ -70,6 +75,8 @@ public class HeatingPad : MonoBehaviour
     {
         isOn = true;
         currentTimer = timer;
+        //forgeParticleSystem.Play();
+        //TODO: also play forge sound
     }
 
     private void OnDestroy()
