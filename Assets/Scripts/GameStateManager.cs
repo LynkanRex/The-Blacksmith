@@ -47,6 +47,9 @@ public class GameStateManager : MonoBehaviour
             if (entry.Key == index)
             {
                 entry.Value.transform.position = desiredTransform;
+                entry.Value.GetComponentInChildren<ParticleSystem>().Play();
+                if(entry.Value.GetComponent<AudioSource>().clip != null)
+                    entry.Value.GetComponent<AudioSource>().PlayOneShot(entry.Value.GetComponent<AudioSource>().clip);
             }   
         }
     }

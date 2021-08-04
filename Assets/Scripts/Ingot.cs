@@ -9,18 +9,21 @@ public class Ingot : MonoBehaviour
     }
 
     private float heat;
+    private int currentHeatTier;
     [SerializeField] private float heatingSpeed;
-    [SerializeField] private float heatingThreshold;
+    [SerializeField] private float[] heatingThresholds;
     [SerializeField] private Mesh[] progressStages;
     [SerializeField] private int strikesPerProgressStage;
-    [SerializeField] private Material heatedMaterial;
+    [SerializeField] private Material[] heatedMaterials;
 
+    private AudioSource audioSource;
     private ParticleSystem particleSystem;
     public bool isBeingHeated;
     public bool malleable;
     public bool isOnAnvil;
     private int currentStrikes;
     private int currentProgressStage;
+    private MeshRenderer meshRenderer;
     private Material startMat;
 
     public int index;
@@ -28,7 +31,9 @@ public class Ingot : MonoBehaviour
     private void Awake()
     {
         startMat = GetComponent<MeshRenderer>().material;
+        meshRenderer = GetComponent<MeshRenderer>(); 
         particleSystem = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     void Update()
@@ -38,21 +43,41 @@ public class Ingot : MonoBehaviour
         else
             Heat -= Time.deltaTime * heatingSpeed;
         
-        if (Heat >= heatingThreshold)
+        if (Heat >= heatingThresholds[0])
             StartIsMalleable();
         else
             EndIsMalleable();
+
+        switch (Heat >= heatingThresholds[0])
+        {
+            case true:
+            {
+                var currentTier = 0;
+                foreach (var tierValue in heatingThresholds)
+                {
+                    if (heat >= tierValue)
+                    {
+                        meshRenderer.material = heatedMaterials[currentTier];
+                        currentTier++;
+                    }
+                }
+                break;
+            }
+            case false:
+                meshRenderer.material = startMat;
+                break;
+        }
     }
 
     public void StartIsMalleable()
     {
-        GetComponent<MeshRenderer>().material = heatedMaterial;
+        //meshRenderer.material = heatedMaterials[currentHeatTier];
         malleable = true;
     }
 
     public void EndIsMalleable()
     {
-        GetComponent<MeshRenderer>().material = startMat;
+        //meshRenderer.material = startMat;
         malleable = false;
     }
 
@@ -68,7 +93,6 @@ public class Ingot : MonoBehaviour
             var timeLeft = hammer.GetComponentInParent<Mallet>().RequestCoolDownData();
             if (timeLeft <= 0.01f)
             {
-                //TODO: Play particle effect and sound of dinging metal + sparks
                 ImpartStrike(); 
                 hammer.GetComponentInParent<Mallet>().TriggerCoolDown();
             }
@@ -96,15 +120,15 @@ public class Ingot : MonoBehaviour
         
         currentStrikes++;
         particleSystem.Play();
-        //TODO: also play audio
-        
+        if(audioSource.clip != null)
+            audioSource.PlayOneShot(audioSource.clip);
+
         if (currentStrikes >= strikesPerProgressStage)
         {
             currentProgressStage++;
             
             if (currentProgressStage == progressStages.Length)
             {
-                Debug.Log("Swapping");
                 FindObjectOfType<GameStateManager>().SwapIngotForDagger(this.index);
                 return;
             }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HeatedIron
+  m_Name: HeatedIronTier1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -74,5 +74,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
-    - _EmissionColor: {r: 2.9019608, g: 0.76862746, b: 0, a: 1}
+    - _EmissionColor: {r: 1.4281905, g: 0.38743463, b: 0, a: 1}
   m_BuildTextureStacks: []
