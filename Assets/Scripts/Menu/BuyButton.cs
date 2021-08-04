@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class BuyButton : MonoBehaviour
 {
-    public bool simulateButtonPress;
+    public bool simulateBuyButtonPress;
+    public bool simulateHammerButtonPress;
+    public bool simulateRespawnIngotButtonPress;
     
     public void BuyIngotButton()
     {
@@ -11,12 +13,34 @@ public class BuyButton : MonoBehaviour
     }
 
 
+    public void RewpawnHammer()
+    {
+        FindObjectOfType<GameStateManager>().RespawnHammer();
+    }
+
+    public void RespawnAllIngots()
+    {
+        FindObjectOfType<GameStateManager>().RespawnAllIngots();
+    }
+
     private void Update()
     {
-        if (simulateButtonPress)
+        if (simulateBuyButtonPress)
         {
             BuyIngotButton();
-            simulateButtonPress = false;
+            simulateBuyButtonPress = false;
+        }
+
+        if (simulateHammerButtonPress)
+        {
+            RewpawnHammer();
+            simulateHammerButtonPress = false;
+        }
+
+        if (simulateRespawnIngotButtonPress)
+        {
+            RespawnAllIngots();
+            simulateRespawnIngotButtonPress = false;
         }
     }
 }

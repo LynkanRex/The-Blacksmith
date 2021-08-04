@@ -133,4 +133,22 @@ public class GameStateManager : MonoBehaviour
     {
         moneyText.text = "Gold: " + currentMoney;
     }
+
+    public void RespawnHammer()
+    {
+        var hammerRef = FindObjectOfType<Mallet>().gameObject;
+        hammerRef.transform.position = ingotSpawnPoint.transform.position;
+    }
+
+    public void RespawnAllIngots()
+    {
+        var ingots = FindObjectsOfType<Ingot>();
+
+        foreach (var ingot in ingots)
+        {
+            if (ingot.name == "Ingot Orig Instance")
+                return;
+            ingot.transform.position = ingotSpawnPoint.transform.position;
+        }
+    }
 }
