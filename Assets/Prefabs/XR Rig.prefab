@@ -1035,7 +1035,7 @@ GameObject:
   - component: {fileID: 8331772536630901336}
   - component: {fileID: 8331772536630901337}
   - component: {fileID: 8331772536630901350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: XR Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}

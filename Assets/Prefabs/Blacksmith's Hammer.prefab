@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5024013026104616561}
   - component: {fileID: 290561042}
   - component: {fileID: 4431771962163651588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blacksmith's Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8105401222828808094}
   - component: {fileID: 3505314384822656397}
   - component: {fileID: 1224528613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ingot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,6 +382,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8105401222828808089}
     m_Modifications:
+    - target: {fileID: 571920203780225729, guid: dfa56f1163c7ec84685084cc44c473ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 571920204703732211, guid: dfa56f1163c7ec84685084cc44c473ff, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -429,6 +433,10 @@ PrefabInstance:
     - target: {fileID: 571920204703732222, guid: dfa56f1163c7ec84685084cc44c473ff, type: 3}
       propertyPath: m_Name
       value: IngotPS
+      objectReference: {fileID: 0}
+    - target: {fileID: 571920204703732222, guid: dfa56f1163c7ec84685084cc44c473ff, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa56f1163c7ec84685084cc44c473ff, type: 3}
