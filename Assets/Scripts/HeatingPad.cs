@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class HeatingPad : MonoBehaviour
 {
@@ -11,6 +9,10 @@ public class HeatingPad : MonoBehaviour
     [SerializeField] private float timerSpeed = 1.0f;
     
     [SerializeField] private ParticleSystem forgeParticleSystem;
+    [SerializeField] private Light forgePointLight;
+    
+    private AudioSource audioSource;
+    
     
     private float currentTimer = 0.0f;
     
@@ -22,6 +24,10 @@ public class HeatingPad : MonoBehaviour
         
         MessageHandler = FindObjectOfType<MessageHandler>();
         MessageHandler.SubscribeMessage<BellowsEvent>(TurnOn);
+
+        audioSource = GetComponent<AudioSource>();
+        forgePointLight.gameObject.SetActive(false);
+        forgeParticleSystem.Stop();
     }
 
     private void Update()
@@ -31,8 +37,9 @@ public class HeatingPad : MonoBehaviour
         else if (isOn)
         {
             isOn = false;
-            //forgeParticleSystem.Stop();
-            //TODO: also stop playing forgesound
+            forgeParticleSystem.Stop();
+            forgePointLight.gameObject.SetActive(false);
+            audioSource.Stop();
         }
             
     }
@@ -86,8 +93,9 @@ public class HeatingPad : MonoBehaviour
     {
         isOn = true;
         currentTimer = timer;
-        //forgeParticleSystem.Play();
-        //TODO: also play forge sound
+        forgePointLight.gameObject.SetActive(true);
+        forgeParticleSystem.Play();
+        audioSource.Play();
     }
 
     private void OnDestroy()

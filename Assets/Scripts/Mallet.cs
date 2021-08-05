@@ -1,4 +1,6 @@
+
 using UnityEngine;
+
 
 public class Mallet : MonoBehaviour
 {
@@ -6,10 +8,18 @@ public class Mallet : MonoBehaviour
     [SerializeField] private BoxCollider[] colliders;
 
     [SerializeField] private float strikeCoolDown = 1.0f;
+
+    [SerializeField] private AudioClip audioClip;
     
     private float cooldownTimer;
+    private AudioSource audioSource;
 
-    
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
     void Update()
     {
         if (isHeld)
@@ -34,9 +44,15 @@ public class Mallet : MonoBehaviour
     {
         if (cooldownTimer >= 0.0f)
             return;
-        
+
         if (other.gameObject.GetComponent<Ingot>() != null)
+        {
             cooldownTimer = strikeCoolDown;
+        }
+            
+        
+        if(!isHeld && !audioSource.isPlaying)
+            audioSource.PlayOneShot(audioClip);
     }
 
     public void TriggerIsHeld()

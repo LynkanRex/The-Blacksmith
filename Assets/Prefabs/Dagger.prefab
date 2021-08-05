@@ -110,8 +110,8 @@ GameObject:
   - component: {fileID: 6002516409621220737}
   - component: {fileID: 6002516409621220738}
   - component: {fileID: 6002516409621220739}
-  - component: {fileID: 2410154490130811518}
   - component: {fileID: 94203734955466689}
+  - component: {fileID: 1201369752067370433}
   m_Layer: 0
   m_Name: Dagger
   m_TagString: Untagged
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  finishedAudioClip: {fileID: 8300000, guid: 18080cbce9a8d4e42ad933c32b345454, type: 3}
+  collisionAudioClip: {fileID: 8300000, guid: 76edafb8304d87c4187978d7d18aa936, type: 3}
 --- !u!54 &6002516409621220740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -267,18 +269,31 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
---- !u!82 &2410154490130811518
-AudioSource:
+--- !u!114 &94203734955466689
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5860745598099624731}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef9c972a143b3940953abceaa4bc3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeld: 0
+--- !u!82 &1201369752067370433
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860745598099624731}
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 76edafb8304d87c4187978d7d18aa936, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -363,19 +378,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &94203734955466689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860745598099624731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef9c972a143b3940953abceaa4bc3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHeld: 0
 --- !u!1001 &2659857912492180187
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 
@@ -22,12 +25,43 @@ public class GameStateManager : MonoBehaviour
     private Dictionary<int, GameObject> spawnedDaggers;
     private Dictionary<int, GameObject> spawnedIngots;
 
-    void Start()
+    private List<AudioSource> audioSourcesInScene;
+    
+    private void ReactivateAudioSources()
+    {
+        
+    }
+    
+    private void Awake()
     {
         spawnedDaggers = new Dictionary<int, GameObject>();
         spawnedIngots = new Dictionary<int, GameObject>();
         UpdateUI();
+        
+        audioSourcesInScene = new List<AudioSource>();
     }
+    
+    void Start()
+    {
+        var sources = FindObjectsOfType<AudioSource>();
+        foreach (var source in sources)
+        {
+            audioSourcesInScene.Add(source);
+        }
+
+        ToggleAudioSourcesInScene(false);
+
+        StartCoroutine(StartAudioSourcesAfter1Second());
+    }
+
+    private void ToggleAudioSourcesInScene(bool value)
+    {
+        foreach (var source in audioSourcesInScene)
+        {
+            source.enabled = value;
+        }
+    }
+
 
     public void SwapIngotForDagger(int index)
     {
@@ -47,9 +81,8 @@ public class GameStateManager : MonoBehaviour
             if (entry.Key == index)
             {
                 entry.Value.transform.position = desiredTransform;
-                entry.Value.GetComponentInChildren<ParticleSystem>().Play();
-                if(entry.Value.GetComponent<AudioSource>().clip != null)
-                    entry.Value.GetComponent<AudioSource>().PlayOneShot(entry.Value.GetComponent<AudioSource>().clip);
+                entry.Value.GetComponent<AudioSource>().enabled = true;
+                entry.Value.GetComponent<Dagger>().PlayFinishedSound();
             }   
         }
     }
@@ -117,6 +150,7 @@ public class GameStateManager : MonoBehaviour
         
         UpdateMoneyAmountAndDisplay(-ingotBuyPrice);
         SpawnIngotAndDagger();
+        FindObjectOfType<SellArea>().TriggerExchangeSound();
     }
 
     private bool CheckAffordability(int value)
@@ -140,7 +174,8 @@ public class GameStateManager : MonoBehaviour
     public void RespawnHammer()
     {
         var hammerRef = FindObjectOfType<Mallet>().gameObject;
-        hammerRef.transform.position = ingotSpawnPoint.transform.position;
+        if(!hammerRef.GetComponent<Mallet>().isHeld)
+            hammerRef.transform.position = ingotSpawnPoint.transform.position;
     }
 
     public void RespawnAllIngots()
@@ -153,5 +188,11 @@ public class GameStateManager : MonoBehaviour
                 return;
             ingot.transform.position = ingotSpawnPoint.transform.position;
         }
+    }
+
+    private IEnumerator StartAudioSourcesAfter1Second()
+    {
+        yield return new WaitForSeconds(1);
+        ToggleAudioSourcesInScene(true);
     }
 }

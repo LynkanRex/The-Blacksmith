@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Bellows : MonoBehaviour
@@ -31,7 +30,8 @@ public class Bellows : MonoBehaviour
     public void HeatForge()
     {
         if(audioSource != null)
-            audioSource.PlayOneShot(bellowsSound);
+            if(!audioSource.isPlaying)
+                audioSource.PlayOneShot(bellowsSound);
         MessageHandler.SendMessage(new BellowsEvent());   
     }
 }

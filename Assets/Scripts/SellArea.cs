@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SellArea : MonoBehaviour
@@ -6,6 +7,13 @@ public class SellArea : MonoBehaviour
     private bool soldRecently;
     private float remainingTimer;
     private float cooldownTimer;
+    
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -25,7 +33,13 @@ public class SellArea : MonoBehaviour
                 return;
             soldRecently = true;
             remainingTimer = cooldownTimer;
+            TriggerExchangeSound();
             FindObjectOfType<GameStateManager>().SellDagger(other.gameObject.GetComponent<Dagger>().index);
         }
+    }
+
+    public void TriggerExchangeSound()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
     }
 }

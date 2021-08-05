@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Ingot : MonoBehaviour
@@ -16,6 +19,9 @@ public class Ingot : MonoBehaviour
     [SerializeField] private int strikesPerProgressStage;
     [SerializeField] private Material[] heatedMaterials;
 
+    [SerializeField] private AudioClip[] hitSounds;
+    [SerializeField] private AudioClip dropSound;
+    
     private AudioSource audioSource;
     private ParticleSystem particleSystem;
     public bool isBeingHeated;
@@ -71,13 +77,11 @@ public class Ingot : MonoBehaviour
 
     public void StartIsMalleable()
     {
-        //meshRenderer.material = heatedMaterials[currentHeatTier];
         malleable = true;
     }
 
     public void EndIsMalleable()
     {
-        //meshRenderer.material = startMat;
         malleable = false;
     }
 
@@ -95,10 +99,11 @@ public class Ingot : MonoBehaviour
             {
                 ImpartStrike(); 
                 hammer.GetComponentInParent<Mallet>().TriggerCoolDown();
+                audioSource.PlayOneShot(hitSounds[0]);
             }
             else
             {
-                //TODO: play a weak "tink" sound in stead
+                audioSource.PlayOneShot(hitSounds[1]);
             }
         }
     }
@@ -136,5 +141,10 @@ public class Ingot : MonoBehaviour
             GetComponent<MeshFilter>().mesh = progressStages[currentProgressStage];
             currentStrikes -= strikesPerProgressStage;
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        audioSource.PlayOneShot(dropSound);
     }
 }
