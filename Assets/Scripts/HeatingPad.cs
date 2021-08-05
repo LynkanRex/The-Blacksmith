@@ -60,12 +60,9 @@ public class HeatingPad : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!isOn)
-            return;
-        
         foreach (var ingot in objects)
         {
-            ingot.GetComponent<Ingot>().isBeingHeated = true;
+            ingot.GetComponent<Ingot>().isBeingHeated = isOn;
         }
     }
 
