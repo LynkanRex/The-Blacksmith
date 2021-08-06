@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 9134201531049218189, guid: 16fe7cd5d4b2e4d40b6d45f7cddb8b97, type: 3}
   - {fileID: 9134201531049218189, guid: 16fe7cd5d4b2e4d40b6d45f7cddb8b97, type: 3}
   - {fileID: 9134201531049218189, guid: 3175ed4e971a6d24b9eb75e0fef8a911, type: 3}
-  strikesPerProgressStage: 1
+  strikesPerProgressStage: 4
   heatedMaterials:
   - {fileID: 2100000, guid: 6e13b30db2429a64688307600c4f1761, type: 2}
   - {fileID: 2100000, guid: 8531d1516f3c42944ad4b055598c0589, type: 2}

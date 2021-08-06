@@ -11522,7 +11522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331772535110302454, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_LineLength
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8331772535475232075, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_Layer
@@ -11538,7 +11538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331772535475232077, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_LineLength
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8331772535475232079, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_InteractionManager
@@ -11570,7 +11570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331772536630901341, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 8331772536630901341, guid: 8a9d2b9ce8ad214478b3951583d14269, type: 3}
       propertyPath: m_LocalScale.z
