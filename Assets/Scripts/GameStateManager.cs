@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
+
 
 public class GameStateManager : MonoBehaviour
 {
@@ -29,11 +26,7 @@ public class GameStateManager : MonoBehaviour
     private Dictionary<int, GameObject> spawnedIngots;
 
     private List<AudioSource> audioSourcesInScene;
-    
-    private void ReactivateAudioSources()
-    {
-        
-    }
+
     
     private void Awake()
     {
