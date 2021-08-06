@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -89,18 +92,32 @@ public class GameStateManager : MonoBehaviour
 
     public void SpawnIngotAndDagger()
     {
+        var keyOfLastIndex = spawnedIngots.LastOrDefault().Key;
+        
         currentlySpawnedIronIngotObject = Instantiate(ironIngotObject);
         currentlySpawnedIronDaggerObject = Instantiate(ironDaggerObject);
 
-        currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = spawnedIngots.Count+1;
-        currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = spawnedDaggers.Count+1;
+        currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = keyOfLastIndex+1;
+        currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = keyOfLastIndex+1;
 
         currentlySpawnedIronDaggerObject.transform.position = poolSpawnPoint.transform.position;
         currentlySpawnedIronIngotObject.transform.position = poolSpawnPoint.transform.position;
 
-        spawnedIngots.Add(spawnedIngots.Count+1, currentlySpawnedIronIngotObject);
-        spawnedDaggers.Add(spawnedDaggers.Count+1, currentlySpawnedIronDaggerObject);
-        
+        bool pairExists = spawnedIngots.TryGetValue(currentlySpawnedIronIngotObject.GetComponent<Ingot>().index, out GameObject value);
+        if(pairExists)
+        {
+            currentlySpawnedIronIngotObject.GetComponent<Ingot>().index = keyOfLastIndex+2;
+            currentlySpawnedIronDaggerObject.GetComponent<Dagger>().index = keyOfLastIndex+2;
+            
+            spawnedIngots.Add(keyOfLastIndex+2, currentlySpawnedIronIngotObject);
+            spawnedDaggers.Add(keyOfLastIndex+2, currentlySpawnedIronDaggerObject);
+        }
+        else
+        {
+            spawnedIngots.Add(keyOfLastIndex+1, currentlySpawnedIronIngotObject);
+            spawnedDaggers.Add(keyOfLastIndex+1, currentlySpawnedIronDaggerObject);    
+        }
+
         TranslateIngot();
         ClearInstanceCache();
     }
@@ -139,6 +156,9 @@ public class GameStateManager : MonoBehaviour
                 break;
             }
         }
+        
+        // TODO: Recreate dictionaries with new entries and give them new Indexes
+        
         
         UpdateMoneyAmountAndDisplay(daggerSellPrice);
     }

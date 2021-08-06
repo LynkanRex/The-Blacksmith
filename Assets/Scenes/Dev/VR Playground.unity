@@ -333,7 +333,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: 8a558c2745d0a45c3a54c8b9527da400, type: 3}
 --- !u!1 &79321350 stripped
@@ -6919,7 +6919,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8a558c2745d0a45c3a54c8b9527da400, type: 3}
 --- !u!1001 &760922528
@@ -9554,7 +9554,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 8a558c2745d0a45c3a54c8b9527da400, type: 3}
 --- !u!1001 &1786025149
@@ -10301,6 +10301,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 852225191894191646, guid: 95ddb4db8ce1d0a47b6573770e06bc7f, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5860745598099624731, guid: 95ddb4db8ce1d0a47b6573770e06bc7f, type: 3}
       propertyPath: m_Name
       value: Dagger Orig Instance
