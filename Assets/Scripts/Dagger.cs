@@ -23,6 +23,8 @@ public class Dagger : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
+        if (!audioSource.enabled)
+            return;
         if(!audioSource.isPlaying)
             audioSource.PlayOneShot(collisionAudioClip);
     }

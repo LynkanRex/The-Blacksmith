@@ -145,6 +145,8 @@ public class Ingot : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        if (!audioSource.enabled)
+            return;
         audioSource.PlayOneShot(dropSound);
     }
 }

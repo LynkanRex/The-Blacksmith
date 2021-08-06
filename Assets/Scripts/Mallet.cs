@@ -50,7 +50,8 @@ public class Mallet : MonoBehaviour
             cooldownTimer = strikeCoolDown;
         }
             
-        
+        if (!audioSource.enabled)
+            return;
         if(!isHeld && !audioSource.isPlaying)
             audioSource.PlayOneShot(audioClip);
     }
